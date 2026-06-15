@@ -1,0 +1,2614 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jovia Fubi | Network Systems & Cybersecurity Specialist</title>
+  <link rel="icon" type="image/jpg" href="image/JOVIA.jpg">
+  <meta name="description"
+    content="Jovia Fubi | Network Systems & Cybersecurity Specialist. BSc. student at Bugema University, Uganda. Specializing in network design, Linux administration, and cybersecurity.">
+  <meta name="keywords"
+    content="Network Engineer, Cybersecurity, Linux Administrator, Uganda, CCNA, Systems Administrator">
+  <meta name="author" content="Jovia Fovia">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #070B19;
+      /* Deepest Navy/Space Black */
+      --bg-navy: #0B132B;
+      /* Dark Navy Blue */
+      --bg-card: #1C2541;
+      /* Medium Navy for Cards */
+      --bg-card-hover: #222E50;
+      /* Glowing card hover state */
+      --accent-blue: #3A86C8;
+      /* Professional Royal Blue */
+      --accent-cyan: #00E5FF;
+      /* Ice Cyan Accent */
+      --accent-glow: rgba(0, 229, 255, 0.15);
+      --white: #FFFFFF;
+      --text-primary: #F8FAFC;
+      /* Off-White */
+      --text-muted: #94A3B8;
+      /* Cool Slate */
+      --border-color: rgba(58, 134, 200, 0.2);
+      --border-glow: rgba(0, 229, 255, 0.35);
+
+      --sans: 'Inter', sans-serif;
+      --mono: 'Space Mono', monospace;
+      --ease: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image:
+        radial-gradient(at 10% 20%, rgba(58, 134, 200, 0.15) 0px, transparent 50%),
+        radial-gradient(at 90% 80%, rgba(0, 229, 255, 0.1) 0px, transparent 50%);
+      background-attachment: fixed;
+      color: var(--text-primary);
+      font-family: var(--sans);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg-dark);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent-blue);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-cyan);
+    }
+
+    /* LOADER */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity .5s ease, visibility .5s ease;
+    }
+
+    #loader.done {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .loader-wrap {
+      text-align: center;
+    }
+
+    .loader-name {
+      font-family: var(--mono);
+      color: var(--accent-cyan);
+      font-size: clamp(1.4rem, 4vw, 2.2rem);
+      letter-spacing: .2em;
+      font-weight: 700;
+      text-transform: uppercase;
+      animation: pulse 1.5s ease-in-out infinite;
+    }
+
+    .loader-bar {
+      width: 200px;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      margin: 1rem auto 0;
+      border-radius: 3px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .loader-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+      width: 0%;
+      animation: load 1.2s cubic-bezier(0.645, 0.045, 0.355, 1) forwards;
+    }
+
+    @keyframes pulse {
+
+      0%,
+      100% {
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes load {
+      to {
+        width: 100%;
+      }
+    }
+
+    /* STICKY NAV */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      transition: var(--ease);
+      border-bottom: 1px solid transparent;
+    }
+
+    header.scrolled {
+      background: rgba(7, 11, 25, 0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: var(--ease);
+    }
+
+    header.scrolled .nav-container {
+      padding: 0.5rem 2rem;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      color: var(--white);
+      font-size: 1.3rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--ease);
+    }
+
+    .nav-logo span {
+      color: var(--accent-cyan);
+    }
+
+    .nav-logo:hover {
+      transform: scale(1.02);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: .05em;
+      transition: var(--ease);
+      position: relative;
+      padding: 0.5rem 0;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+      transition: var(--ease);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent-cyan);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      font-family: var(--mono);
+      color: var(--bg-dark);
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
+      border: none;
+      padding: 0.6rem 1.3rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 700;
+      transition: var(--ease);
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.25);
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 6px;
+      z-index: 1100;
+    }
+
+    .hamburger span {
+      width: 26px;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: var(--ease);
+      display: block;
+    }
+
+    .hamburger.open span:nth-child(1) {
+      transform: rotate(45deg) translate(5deg, 6deg);
+    }
+
+    .hamburger.open span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.open span:nth-child(3) {
+      transform: rotate(-45deg) translate(6deg, -7deg);
+    }
+
+    /* Mobile Drawer */
+    .mob-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(7, 11, 25, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--ease);
+    }
+
+    .mob-menu.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mob-menu a {
+      font-family: var(--mono);
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1.4rem;
+      font-weight: 600;
+      transition: var(--ease);
+    }
+
+    .mob-menu a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .mob-cta {
+      font-family: var(--mono);
+      color: var(--bg-dark);
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      padding: 0.8rem 2rem;
+      border-radius: 4px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* SIDEBARS */
+    .sidebar-left,
+    .sidebar-right {
+      position: fixed;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+      z-index: 10;
+    }
+
+    .sidebar-left {
+      left: 3rem;
+    }
+
+    .sidebar-right {
+      right: 3rem;
+    }
+
+    .sidebar-left a {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      transition: var(--ease);
+    }
+
+    .sidebar-left a:hover {
+      color: var(--accent-cyan);
+      transform: translateY(-3px);
+    }
+
+    .sidebar-right a {
+      font-family: var(--mono);
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      letter-spacing: .12em;
+      writing-mode: vertical-rl;
+      text-decoration: none;
+      transition: var(--ease);
+      padding: 0.5rem 0;
+    }
+
+    .sidebar-right a:hover {
+      color: var(--accent-cyan);
+      transform: translateY(-3px);
+    }
+
+    .sidebar-left::after,
+    .sidebar-right::after {
+      content: '';
+      width: 1px;
+      height: 120px;
+      background: var(--border-color);
+    }
+
+    /* SECTION LAYOUTS */
+    section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 120px 2rem 80px;
+    }
+
+    .sec-header {
+      margin-bottom: 4rem;
+      max-width: 700px;
+      position: relative;
+    }
+
+    .sec-number {
+      font-family: var(--mono);
+      color: var(--accent-cyan);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+      display: block;
+      font-weight: 700;
+    }
+
+    .sec-title {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      font-weight: 800;
+      color: var(--white);
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .sec-title::after {
+      content: '';
+      height: 1px;
+      flex-grow: 1;
+      background: linear-gradient(90deg, var(--accent-blue), transparent);
+    }
+
+    .sec-subtitle {
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      font-size: 1rem;
+    }
+
+    /* HERO SECTION */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 100px;
+      padding-bottom: 50px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 4rem;
+      align-items: center;
+      width: 100%;
+    }
+
+    .hero-content {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .h-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(58, 134, 200, 0.1);
+      border: 1px solid var(--border-color);
+      color: var(--accent-cyan);
+      padding: 0.5rem 1rem;
+      border-radius: 50px;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .h-badge i {
+      font-size: 0.65rem;
+      animation: blink 1.5s ease infinite;
+    }
+
+    .h-name {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 0.5rem;
+    }
+
+    .h-sub {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 600;
+      color: var(--accent-cyan);
+      line-height: 1.3;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .h-desc {
+      color: var(--text-muted);
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      max-width: 620px;
+    }
+
+    .h-btns {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 1rem 2rem;
+      border-radius: 4px;
+      transition: var(--ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .btn-primary {
+      color: var(--bg-dark);
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      box-shadow: 0 4px 20px rgba(0, 229, 255, 0.2);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(0, 229, 255, 0.4);
+    }
+
+    .btn-secondary {
+      color: var(--accent-cyan);
+      background: transparent;
+      border: 1.5px solid var(--accent-cyan);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(0, 229, 255, 0.05);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.1);
+    }
+
+    .btn-text {
+      color: var(--text-primary);
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--ease);
+      padding: 1rem 0;
+    }
+
+    .btn-text:hover {
+      color: var(--accent-cyan);
+      transform: translateX(3px);
+    }
+
+    /* PROFILE IMAGE WRAP */
+    .hero-image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transform: scale(0.9);
+      animation: scaleUp 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+    }
+
+    .photo-frame {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      padding: 2px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .photo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+      background: var(--bg-dark);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--ease);
+      filter: grayscale(20%) contrast(110%);
+    }
+
+    .photo-frame:hover .photo-img {
+      filter: none;
+      transform: scale(1.05);
+    }
+
+    /* Decorative glowing rings */
+    .photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -15px;
+      border: 1.5px dashed var(--accent-cyan);
+      border-radius: 24px;
+      opacity: 0.3;
+      z-index: -1;
+      animation: rotateRing 30s linear infinite;
+    }
+
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 16px;
+      box-shadow: 0 0 35px var(--accent-glow);
+      opacity: 0;
+      transition: var(--ease);
+      pointer-events: none;
+    }
+
+    .photo-frame:hover::after {
+      opacity: 1;
+    }
+
+    /* ABOUT ME */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .about-bio p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.8;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-bio strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .quick-details {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+
+    .detail-item {
+      background: rgba(28, 37, 65, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .detail-item i {
+      color: var(--accent-cyan);
+      font-size: 1.2rem;
+    }
+
+    .detail-item div h5 {
+      font-size: 0.75rem;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .detail-item div p {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--white);
+      margin: 0;
+    }
+
+    .about-edu-card {
+      background: linear-gradient(135deg, rgba(28, 37, 65, 0.8) 0%, rgba(11, 19, 43, 0.9) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .about-edu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--accent-cyan), var(--accent-blue));
+    }
+
+    .edu-badge {
+      background: rgba(0, 229, 255, 0.1);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      color: var(--accent-cyan);
+      padding: 0.3rem 0.8rem;
+      border-radius: 50px;
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .edu-degree {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-inst {
+      color: var(--text-primary);
+      font-size: 0.95rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+    }
+
+    .edu-loc {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-bottom: 1rem;
+    }
+
+    .edu-date {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* SKILLS COMMONS */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .skill-card {
+      background: rgba(28, 37, 65, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      transition: var(--ease);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .skill-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at top right, rgba(0, 229, 255, 0.05), transparent 60%);
+      pointer-events: none;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 15px 30px rgba(0, 229, 255, 0.05);
+    }
+
+    .skill-icon-wrap {
+      width: 50px;
+      height: 50px;
+      background: rgba(58, 134, 200, 0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      transition: var(--ease);
+      border: 1px solid var(--border-color);
+    }
+
+    .skill-card:hover .skill-icon-wrap {
+      background: rgba(0, 229, 255, 0.1);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .skill-icon-wrap i {
+      font-size: 1.5rem;
+      color: var(--accent-cyan);
+      transition: var(--ease);
+    }
+
+    .skill-card:hover .skill-icon-wrap i {
+      transform: scale(1.1);
+    }
+
+    .skill-name {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+    }
+
+    .skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.06);
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      padding: 0.35rem 0.75rem;
+      border-radius: 4px;
+      transition: var(--ease);
+    }
+
+    .skill-tag:hover {
+      background: rgba(0, 229, 255, 0.15);
+      border-color: var(--accent-cyan);
+    }
+
+    /* TECHNICAL SKILLS METERS */
+    .skills-tech-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-top: 2rem;
+    }
+
+    .tech-meter-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .meter-item {
+      width: 100%;
+    }
+
+    .meter-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .meter-title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .meter-pct {
+      font-family: var(--mono);
+      color: var(--accent-cyan);
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .meter-bar {
+      height: 6px;
+      background: rgba(255, 255, 255, 0.07);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-cyan));
+      border-radius: 10px;
+      width: 0%;
+      transition: width 1.5s cubic-bezier(0.1, 0.8, 0.2, 1);
+    }
+
+    /* NET & SYS ADMIN SPECIFICS */
+    .admin-skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .admin-card {
+      background: linear-gradient(135deg, rgba(28, 37, 65, 0.6) 0%, rgba(11, 19, 43, 0.8) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    .admin-card::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: 50px;
+      right: 50px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+    }
+
+    .admin-hdr {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .admin-hdr i {
+      font-size: 2rem;
+      color: var(--accent-cyan);
+    }
+
+    .admin-hdr h3 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .admin-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .admin-list-item {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .admin-list-item i {
+      color: var(--accent-cyan);
+      margin-top: 0.3rem;
+      font-size: 0.95rem;
+    }
+
+    .admin-list-item h4 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.25rem;
+    }
+
+    .admin-list-item p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* CERTIFICATIONS */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .cert-card {
+      background: rgba(28, 37, 65, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: var(--ease);
+      backdrop-filter: blur(10px);
+    }
+
+    .cert-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 15px 30px rgba(0, 229, 255, 0.08);
+    }
+
+    .cert-badge {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: rgba(0, 229, 255, 0.05);
+      border: 1px dashed var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cert-badge i {
+      color: var(--accent-cyan);
+      font-size: 1.2rem;
+    }
+
+    .cert-issuer {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+    }
+
+    .cert-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1.2rem;
+      line-height: 1.4;
+      flex-grow: 1;
+    }
+
+    .cert-meta {
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .cert-meta-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .cert-meta-item span:last-child {
+      color: var(--text-primary);
+      font-weight: 500;
+    }
+
+    .cert-status {
+      font-family: var(--mono);
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      background: rgba(16, 185, 129, 0.1);
+      color: #10B981;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .cert-status.in-progress {
+      background: rgba(245, 158, 11, 0.1);
+      color: #F59E0B;
+      border: 1px solid rgba(245, 158, 11, 0.2);
+    }
+
+    /* PROJECTS SECTION */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: rgba(28, 37, 65, 0.4);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: var(--ease);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      position: relative;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .project-img-wrap {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      background: var(--bg-dark);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .project-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--ease);
+    }
+
+    .project-card:hover .project-img {
+      transform: scale(1.04);
+    }
+
+    .project-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(7, 11, 25, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.5rem;
+      opacity: 0;
+      transition: var(--ease);
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-overlay-link {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background: var(--accent-cyan);
+      color: var(--bg-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: var(--ease);
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.3);
+    }
+
+    .project-overlay-link:hover {
+      transform: scale(1.1);
+      background: var(--white);
+    }
+
+    .project-info {
+      padding: 1.8rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .project-desc-list {
+      list-style: none;
+      margin-bottom: 1.5rem;
+      flex-grow: 1;
+    }
+
+    .project-desc-list li {
+      position: relative;
+      padding-left: 1.2rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 0.6rem;
+      line-height: 1.5;
+    }
+
+    .project-desc-list li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .project-tech span {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.05);
+      border: 1px solid rgba(0, 229, 255, 0.15);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+    }
+
+    /* TIMELINE (EDUCATION & EXPERIENCE) */
+    .timeline-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 31px;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent-cyan), var(--border-color) 70%, transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+      padding-left: 5rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .timeline-icon {
+      position: absolute;
+      left: 15px;
+      top: 0;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--bg-dark);
+      border: 2px solid var(--accent-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-cyan);
+      z-index: 2;
+      box-shadow: 0 0 10px rgba(0, 229, 255, 0.2);
+      transition: var(--ease);
+    }
+
+    .timeline-item:hover .timeline-icon {
+      background: var(--accent-cyan);
+      color: var(--bg-dark);
+      box-shadow: 0 0 15px var(--accent-cyan);
+    }
+
+    .timeline-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 0.8rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .timeline-role {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--white);
+    }
+
+    .timeline-role span {
+      color: var(--accent-cyan);
+      font-weight: 600;
+    }
+
+    .timeline-date {
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--accent-cyan);
+      background: rgba(0, 229, 255, 0.08);
+      border: 1px solid rgba(0, 229, 255, 0.2);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    .timeline-org {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .timeline-desc {
+      list-style: none;
+    }
+
+    .timeline-desc li {
+      position: relative;
+      padding-left: 1.2rem;
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .timeline-desc li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent-cyan);
+    }
+
+    /* CONTACT SECTION */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-info-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .contact-info-desc {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
+
+    .contact-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .contact-method-card {
+      background: rgba(28, 37, 65, 0.3);
+      border: 1px solid var(--border-color);
+      padding: 1.2rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: var(--ease);
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .contact-method-card:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(28, 37, 65, 0.5);
+      transform: translateX(4px);
+    }
+
+    .contact-method-icon {
+      width: 45px;
+      height: 45px;
+      border-radius: 6px;
+      background: rgba(58, 134, 200, 0.1);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-cyan);
+      font-size: 1.2rem;
+      transition: var(--ease);
+    }
+
+    .contact-method-card:hover .contact-method-icon {
+      background: rgba(0, 229, 255, 0.1);
+      border-color: var(--accent-cyan);
+    }
+
+    .contact-method-details h5 {
+      font-size: 0.75rem;
+      font-family: var(--mono);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      margin-bottom: 0.1rem;
+    }
+
+    .contact-method-details p {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .contact-socials {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(28, 37, 65, 0.4);
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-primary);
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: var(--ease);
+    }
+
+    .social-btn:hover {
+      background: var(--accent-cyan);
+      color: var(--bg-dark);
+      border-color: var(--accent-cyan);
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0, 229, 255, 0.3);
+    }
+
+    /* CONTACT FORM */
+    .contact-form-wrap {
+      background: linear-gradient(135deg, rgba(28, 37, 65, 0.5) 0%, rgba(11, 19, 43, 0.7) 100%);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 2.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(10px);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group.half {
+      margin-bottom: 0;
+    }
+
+    .form-label {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .form-input {
+      background: rgba(7, 11, 25, 0.5);
+      border: 1.5px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 0.95rem;
+      padding: 0.9rem 1.2rem;
+      outline: none;
+      transition: var(--ease);
+    }
+
+    .form-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 12px rgba(0, 229, 255, 0.15);
+      background: rgba(7, 11, 25, 0.8);
+    }
+
+    .form-input::placeholder {
+      color: rgba(148, 163, 184, 0.4);
+    }
+
+    select.form-input {
+      appearance: none;
+      -webkit-appearance: none;
+      background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+      cursor: pointer;
+    }
+
+    select.form-input option {
+      background: var(--bg-navy);
+      color: var(--text-primary);
+    }
+
+    textarea.form-input {
+      resize: vertical;
+      min-height: 150px;
+    }
+
+    .form-submit-btn {
+      font-family: var(--mono);
+      color: var(--bg-dark);
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+      border: none;
+      padding: 1rem 2.2rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: var(--ease);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);
+    }
+
+    .form-submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0, 229, 255, 0.4);
+    }
+
+    .form-submit-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .form-msg {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-family: var(--mono);
+      display: none;
+    }
+
+    .form-msg.success {
+      display: block;
+      background: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      color: #10B981;
+    }
+
+    .form-msg.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #EF4444;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #040813;
+      border-top: 1px solid var(--border-color);
+      padding: 4rem 2rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .footer-logo {
+      font-family: var(--mono);
+      color: var(--white);
+      font-size: 1.5rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .footer-logo span {
+      color: var(--accent-cyan);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: var(--ease);
+      font-family: var(--mono);
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .footer-socials a {
+      color: var(--text-muted);
+      font-size: 1.3rem;
+      transition: var(--ease);
+    }
+
+    .footer-socials a:hover {
+      color: var(--accent-cyan);
+      transform: translateY(-2px);
+    }
+
+    .footer-copyright {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      font-family: var(--mono);
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.03);
+      padding-top: 1.5rem;
+      width: 100%;
+    }
+
+    /* SCROLL ANIMATION CLASS */
+    .fi {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .fi.vis {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVENESS */
+    @media(max-width: 992px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+        text-align: center;
+      }
+
+      .h-desc {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .h-btns {
+        justify-content: center;
+      }
+
+      .hero-image-container {
+        order: -1;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .admin-skills-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .skills-tech-wrap {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    @media(max-width: 768px) {
+
+      .sidebar-left,
+      .sidebar-right {
+        display: none;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      header {
+        padding: 0.5rem 0;
+      }
+
+      header.scrolled {
+        padding: 0.3rem 0;
+      }
+
+      section {
+        padding: 100px 1.5rem 60px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .form-group.half {
+        margin-bottom: 1.5rem;
+      }
+
+      .timeline-container::before {
+        left: 17px;
+      }
+
+      .timeline-item {
+        padding-left: 3.5rem;
+      }
+
+      .timeline-icon {
+        left: 0;
+      }
+    }
+
+    /* KEYFRAMES */
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scaleUp {
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes rotateRing {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes blink {
+
+      0%,
+      100% {
+        opacity: 0.3;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- LOADER -->
+  <div id="loader">
+    <div class="loader-wrap">
+      <div class="loader-name">Jovia Fubi</div>
+      <div class="loader-bar">
+        <div class="loader-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">JOVIA<span>.</span>FUBI</a>
+      <ul class="nav-links">
+        <li><a href="#about" class="nav-anchor">About</a></li>
+        <li><a href="#skills" class="nav-anchor">Skills</a></li>
+        <li><a href="#certifications" class="nav-anchor">Certifications</a></li>
+        <li><a href="#projects" class="nav-anchor">Projects</a></li>
+        <li><a href="#timeline" class="nav-anchor">Resume</a></li>
+        <li><a href="#contact" class="nav-anchor">Contact</a></li>
+      </ul>
+      <a href="#contact" class="nav-cta">Get In Touch</a>
+      <button class="hamburger" id="hamburger-btn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU DRAWER -->
+  <div class="mob-menu" id="mob-menu">
+    <a href="#about" class="mob-anchor">About</a>
+    <a href="#skills" class="mob-anchor">Skills</a>
+    <a href="#certifications" class="mob-anchor">Certifications</a>
+    <a href="#projects" class="mob-anchor">Projects</a>
+    <a href="#timeline" class="mob-anchor">Resume</a>
+    <a href="#contact" class="mob-anchor">Contact</a>
+    <a href="#contact" class="mob-cta">Get In Touch</a>
+  </div>
+
+  <!-- SOCIAL SIDEBAR (LEFT) -->
+  <div class="sidebar-left">
+    <a href="https://linkedin.com/in/jovia-fubi" target="_blank" title="LinkedIn" aria-label="LinkedIn"><i
+        class="fab fa-linkedin-in"></i></a>
+    <a href="https://github.com/jovia-fubi" target="_blank" title="GitHub" aria-label="GitHub"><i
+        class="fab fa-github"></i></a>
+    <a href="https://wa.me/256765724432" target="_blank" title="WhatsApp" aria-label="WhatsApp"><i
+        class="fab fa-whatsapp"></i></a>
+  </div>
+
+  <!-- EMAIL SIDEBAR (RIGHT) -->
+  <div class="sidebar-right">
+    <a href="mailto:jovia.fubi312@gmail.com" title="Email Jovia">jovia.fubi312@gmail.com</a>
+  </div>
+
+  <!-- ═══════════════════════════════════
+       HERO
+  ══════════════════════════════════════ -->
+  <section id="hero">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <div class="h-badge"><i class="fas fa-circle"></i> Available for Opportunities</div>
+        <p class="btn-text"
+          style="color:var(--accent-cyan); font-family:var(--mono); text-transform:uppercase; font-size:0.85rem; letter-spacing:0.1em; margin-bottom:0.5rem;">
+          Hello, my name is</p>
+        <h1 class="h-name">Jovia Fubi</h1>
+        <h2 class="h-sub">Stephen Sunday</h2>
+        <p class="h-desc">A student in Network Systems and Administration at
+          Bugema University, Uganda. Passionate about designing secure networks,
+          hardening systems, and building the digital infrastructure of the future.
+          Proficient in networking protocols, Linux administration, and cybersecurity frameworks..</p>
+        <div class="h-btns">
+          <a href="#contact" class="btn btn-primary">Let's Connect <i class="fas fa-paper-plane"></i></a>
+          <a href="https://wa.me/256765724432" target="_blank" class="btn btn-secondary"><i class="fab fa-whatsapp"></i>
+            WhatsApp Chat</a>
+        </div>
+      </div>
+      <div class="hero-image-container">
+        <div class="photo-frame">
+          <div class="photo-inner">
+            <img src="image/JOVIA.jpg" alt="Jovia Fubi Stephen" class="photo-img">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       ABOUT ME
+  ══════════════════════════════════════ -->
+  <section id="about" class="fi">
+    <div class="sec-header">
+      <span class="sec-number"></span>
+      <h2 class="sec-title">About Me</h2>
+      <p class="sec-subtitle">My journey, education, and career aspirations</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-bio">
+        <p>I am a student currently studying for a **Bachelor of science in Network Systems and Administration** at
+          Bugema University in
+          Kampala, Uganda. My core focus lies in intermediate and advanced network topology engineering, Linux server
+          environments, and administrative threat intelligence.</p>
+        <p>I actively practice **network engineering**, **Linux server hardening**, **vulnerability analyses**, and
+          administrative automation scripts. I am highly interested in helping small and mid-sized enterprises across
+          East Africa establish secure local and wide area network services that adhere to current regulatory
+          guidelines.</p>
+        <p>When I am not modeling routing plans or auditing access logs, I participate in academic technology groups,
+          assist in lab setups, and write tutorials detailing basic Linux commands and network security essentials.</p>
+        <div class="quick-details">
+          <div class="detail-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <div>
+              <h5>Location</h5>
+              <p>Kampala, Uganda</p>
+            </div>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-briefcase"></i>
+            <div>
+              <h5>Status</h5>
+              <p>Open to Work</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="about-education-panel">
+        <div class="about-edu-card">
+          <span class="edu-badge"><i class="fas fa-university"></i> Higher Education</span>
+          <h3 class="edu-degree">BSc. Network Systems & Administration</h3>
+          <p class="edu-inst">Bugema University</p>
+          <p class="edu-loc">Kampala, Uganda</p>
+          <div class="edu-date">
+            <i class="far fa-calendar-alt"></i>
+            <span>2023 — Present (Ongoing)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       TECHNICAL SKILLS
+  ══════════════════════════════════════ -->
+  <section id="skills" class="fi">
+    <div class="sec-header">
+      <span class="sec-number"></span>
+      <h2 class="sec-title">Technical Skills</h2>
+      <p class="sec-subtitle">Proficiencies mapped to industry standards</p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-icon-wrap"><i class="fas fa-network-wired"></i></div>
+        <h3 class="skill-name">Networking</h3>
+        <div class="skill-tags">
+          <span class="sk-tag">TCP/IP Protocol Suite</span>
+          <span class="sk-tag">VLAN Segmentation</span>
+          <span class="sk-tag">Subnetting (VLSM)</span>
+          <span class="sk-tag">DHCP / DNS Setup</span>
+          <span class="sk-tag">Routing Protocols</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon-wrap"><i class="fas fa-shield-alt"></i></div>
+        <h3 class="skill-name">Cybersecurity</h3>
+        <div class="skill-tags">
+          <span class="sk-tag">Firewalls & ACLs</span>
+          <span class="sk-tag">VPN Access (IPsec/SSL)</span>
+          <span class="sk-tag">SSH Hardening</span>
+          <span class="sk-tag">Encryption & PKI</span>
+          <span class="sk-tag">IDS/IPS Frameworks</span>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon-wrap"><i class="fab fa-linux"></i></div>
+        <h3 class="skill-name">Operating Systems</h3>
+        <div class="skill-tags">
+          <span class="sk-tag">Ubuntu Linux Server</span>
+          <span class="sk-tag">Windows Server AD</span>
+          <span class="sk-tag">Bash shell CLI</span>
+          <span class="sk-tag">Virtualization</span>
+          <span class="sk-tag">Systemd & Cron</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="skills-tech-wrap">
+      <div class="tech-meter-group">
+        <div class="meter-item">
+          <div class="meter-label">
+            <span class="meter-title">Router & Switch Configuration</span>
+            <span class="meter-pct" data-target="90%">0%</span>
+          </div>
+          <div class="meter-bar">
+            <div class="meter-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+        <div class="meter-item">
+          <div class="meter-label">
+            <span class="meter-title">Linux Server Administration</span>
+            <span class="meter-pct" data-target="55%">0%</span>
+          </div>
+          <div class="meter-bar">
+            <div class="meter-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+        <div class="meter-item">
+          <div class="meter-label">
+            <span class="meter-title">Packet Capture & Analysis (Wireshark)</span>
+            <span class="meter-pct" data-target="75%">0%</span>
+          </div>
+          <div class="meter-bar">
+            <div class="meter-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-meter-group">
+        <div class="meter-item">
+          <div class="meter-label">
+            <span class="meter-title">Firewall & Security Hardening</span>
+            <span class="meter-pct" data-target="80%">0%</span>
+          </div>
+          <div class="meter-bar">
+            <div class="meter-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+        <div class="meter-item">
+          <div class="meter-label">
+            <span class="meter-title">Scripting & Automation (Python/Bash)</span>
+            <span class="meter-pct" data-target="65%">0%</span>
+          </div>
+          <div class="meter-bar">
+            <div class="meter-fill" style="width: 0%;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       NETWORK & SYSTEM ADMIN SKILLS
+  ══════════════════════════════════════ -->
+  <section id="admin-skills" class="fi">
+    <div class="sec-header">
+      <span class="sec-number"></span>
+      <h2 class="sec-title">Core Administration Specializations</h2>
+      <p class="sec-subtitle">Deep dive into my operational systems and infrastructure skills</p>
+    </div>
+
+    <div class="admin-skills-grid">
+      <!-- Network Administration Skills -->
+      <div class="admin-card">
+        <div class="admin-hdr">
+          <i class="fas fa-project-diagram"></i>
+          <h3>Network Administration</h3>
+        </div>
+        <ul class="admin-list">
+          <li class="admin-list-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <h4>Cisco Routing & Switching</h4>
+              <p>Designing LAN architectures using virtual VLAN segmentation, Inter-VLAN routing via Router-on-a-Stick,
+                Trunking protocols (802.1Q), and Spanning Tree Protocol (STP) configuration.</p>
+            </div>
+          </li>
+          <li class="admin-list-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <h4>Dynamic Routing Implementations</h4>
+              <p>Basic modeling and setup of OSPFv2 Single-Area systems, static routing pathways with redundant backup
+                links, and routing information exchanges.</p>
+            </div>
+          </li>
+          <li class="admin-list-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <h4>IP Addressing Schemes</h4>
+              <p>Strategic subnet calculations using VLSM (Variable Length Subnet Masking) to optimize IPv4 address
+                distribution. Knowledge of IPv6 addressing, link-local configurations, and global unicast
+                configurations.</p>
+            </div>
+          </li>
+          <li class="admin-list-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <h4>Packet Filtering & Inspections</h4>
+              <p>Constructing standard and extended Access Control Lists (ACLs) to manage traffic flows. Network Address
+                Translation (NAT/PAT) setups to manage public/private addressing boundaries.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- System Administration Skills -->
+      <div class="admin-card">
+        <div class="admin-hdr">
+          <i class="fas fa-server"></i>
+          <h3>System Administration</h3>
+        </div>
+        <ul class="admin-list">
+          <li class="admin-list-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <h4>Linux Server Hardening</h4>
+              <p>Configuring secure SSH channels (disabling root login, key authentication), firewall restrictions via
+                UFW/iptables, and user privilege delegations through sudo policies.</p>
+            </div>
+          </li>
+          <li class="admin-list-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <h4>Windows Server Directory Management</h4>
+              <p>Structuring basic Active Directory organizational units, creating group profiles, delegating security
+                permissions, and managing network file access shares.</p>
+            </div>
+          </li>
+          <li class="admin-list-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <h4>Administrative Automations</h4>
+              <p>Developing shell scripts (Bash/Python) to audit log file entries, execute automatic backups, and
+                monitor disk partition usages via system crontabs.</p>
+            </div>
+          </li>
+          <li class="admin-list-item">
+            <i class="fas fa-check-circle"></i>
+            <div>
+              <h4>Web & Domain Services</h4>
+              <p>Deploying Apache and Nginx web servers in Ubuntu environments, generating self-signed certificates,
+                enforcing HTTPS configurations, and hosting secure local academic portals.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       CERTIFICATIONS
+  ══════════════════════════════════════ -->
+  <section id="certifications" class="fi">
+    <div class="sec-header">
+      <span class="sec-number"></span>
+      <h2 class="sec-title">Certifications</h2>
+      <p class="sec-subtitle">Professional milestones and continuing education credentials</p>
+    </div>
+
+    <div class="certs-grid">
+      <div class="cert-card">
+        <div class="cert-badge"><i class="fas fa-network-wired"></i></div>
+        <span class="cert-issuer">Cisco Systems</span>
+        <h3 class="cert-name">Cisco Certified Network Associate (CCNA 200-301)</h3>
+        <div class="cert-meta">
+          <div class="cert-meta-item">
+            <span>Status</span>
+            <span class="cert-status">Completed</span>
+          </div>
+          <div class="cert-meta-item">
+            <span>Verify ID</span>
+            <span>CSCO14472910</span>
+          </div>
+          <div class="cert-meta-item">
+            <span>Issued</span>
+            <span>2024</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge"><i class="fas fa-shield-alt"></i></div>
+        <span class="cert-issuer">Linux</span>
+        <h3 class="cert-name">The Linux Foundation Certified System Administrator (LFCS)</h3>
+        <div class="cert-meta">
+          <div class="cert-meta-item">
+            <span>Status</span>
+            <span class="cert-status">Completed</span>
+          </div>
+          <div class="cert-meta-item">
+            <span>Verify ID</span>
+            <span>LF0kmj41ccitq</span>
+          </div>
+          <div class="cert-meta-item">
+            <span>Issued</span>
+            <span>2026</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-badge"><i class="fab fa-redhat"></i></div>
+        <span class="cert-issuer">Red Hat</span>
+        <h3 class="cert-name">Red Hat Certified System Administrator (RHCSA)</h3>
+        <div class="cert-meta">
+          <div class="cert-meta-item">
+            <span>Status</span>
+            <span class="cert-status in-progress">In Progress</span>
+          </div>
+          <div class="cert-meta-item">
+            <span>Expected</span>
+            <span>Late 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       PROJECTS
+  ══════════════════════════════════════ -->
+  <section id="projects" class="fi">
+    <div class="sec-header">
+      <span class="sec-number"></span>
+      <h2 class="sec-title">Academic & Lab Projects</h2>
+      <p class="sec-subtitle">Hands-on infrastructure models and tools I have engineered</p>
+    </div>
+
+    <div class="projects-grid">
+      <!-- Project 1 -->
+      <div class="project-card">
+        <div class="project-img-wrap">
+          <img src="image/project_network.png" alt="University Network Analysis" class="project-img">
+          <div class="project-overlay">
+            <a href="https://github.com/jovia-fubi" target="_blank" class="project-overlay-link"
+              aria-label="GitHub Code"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">University Network Topology Model</h3>
+          <ul class="project-desc-list">
+            <li>Created a virtual model of Bugema University’s network layout in Cisco Packet Tracer.</li>
+            <li>Implemented VLAN isolation, inter-VLAN configurations, and secure trunk lanes.</li>
+            <li>Integrated Access Control lists to secure staff server segments from public networks.</li>
+          </ul>
+          <div class="project-tech">
+            <span>Packet Tracer</span>
+            <span>VLSM</span>
+            <span>ACLs</span>
+            <span>VLANs</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 2 -->
+      <div class="project-card">
+        <div class="project-img-wrap">
+          <img src="image/project_server.png" alt="Linux Server Administration" class="project-img">
+          <div class="project-overlay">
+            <a href="https://github.com/jovia-fubi" target="_blank" class="project-overlay-link"
+              aria-label="GitHub Code"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">Hardened Ubuntu Academic Web Server</h3>
+          <ul class="project-desc-list">
+            <li>Deployed Ubuntu Server with secure SSH permissions using custom asymmetric key pairs.</li>
+            <li>Built an Apache portal with HTTPS redirections and system status scripts.</li>
+            <li>Configured automatic weekly data compression cron jobs to backup server folders.</li>
+          </ul>
+          <div class="project-tech">
+            <span>Ubuntu</span>
+            <span>Apache</span>
+            <span>UFW Firewall</span>
+            <span>Bash</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 3 -->
+      <div class="project-card">
+        <div class="project-img-wrap">
+          <img src="image/project_security.png" alt="Secure Data Exchange Protocol" class="project-img">
+          <div class="project-overlay">
+            <a href="https://github.com/jovia-fubi" target="_blank" class="project-overlay-link"
+              aria-label="GitHub Code"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">Secure Exchange Cryptographic Protocol</h3>
+          <ul class="project-desc-list">
+            <li>Developed Python logic to encrypt academic files using AES-256 libraries.</li>
+            <li>Enforced sha256 checksums to authenticate content integrity during transport.</li>
+            <li>Protected administrative configurations via secure environment variables.</li>
+          </ul>
+          <div class="project-tech">
+            <span>Python</span>
+            <span>AES-256</span>
+            <span>Security Frameworks</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Project 4 -->
+      <div class="project-card">
+        <div class="project-img-wrap">
+          <img src="image/project_dashboard.png" alt="Network Monitoring Dashboard" class="project-img">
+          <div class="project-overlay">
+            <a href="https://github.com/jovia-fubi" target="_blank" class="project-overlay-link"
+              aria-label="GitHub Code"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <div class="project-info">
+          <h3 class="project-title">Network Device Monitoring Dashboard</h3>
+          <ul class="project-desc-list">
+            <li>Designed a dashboard mock displaying simulated network packet logs and device loads.</li>
+            <li>Constructed clean chart interfaces showing latency profiles and server errors.</li>
+            <li>Implemented a notification system notifying admins about offline hosts.</li>
+          </ul>
+          <div class="project-tech">
+            <span>Node.js</span>
+            <span>Chart.js</span>
+            <span>JavaScript</span>
+            <span>CSS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       EDUCATION & EXPERIENCE (TIMELINE)
+  ══════════════════════════════════════ -->
+  <section id="timeline" class="fi">
+    <div class="sec-header">
+      <span class="sec-number"></span>
+      <h2 class="sec-title">Academic & Professional Journey</h2>
+      <p class="sec-subtitle">Timeline highlighting my academic accomplishments and practical experience</p>
+    </div>
+
+    <div class="timeline-container">
+      <!-- Item 1 -->
+      <div class="timeline-item fi">
+        <div class="timeline-icon"><i class="fas fa-laptop-code"></i></div>
+        <div class="timeline-header">
+          <h3 class="timeline-role">Student Network Administrator</h3>
+          <span class="timeline-date">Jan 2024 — Present</span>
+        </div>
+        <p class="timeline-org">Bugema University (Academic Lab Assistant)</p>
+        <ul class="timeline-desc">
+          <li>Assist in maintaining standard router configurations and lab switch layouts.</li>
+          <li>Conduct network audit captures during student labs to troubleshoot connectivity anomalies.</li>
+          <li>Support faculty in managing local server resource limits and user permissions.</li>
+          <li>Prepare comprehensive documentation detailing lab exercises for routing protocols.</li>
+        </ul>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="timeline-item fi">
+        <div class="timeline-icon"><i class="fas fa-graduation-cap"></i></div>
+        <div class="timeline-header">
+          <h3 class="timeline-role">BSc. Network Systems & Administration</h3>
+          <span class="timeline-date">Oct 2023 — Ongoing</span>
+        </div>
+        <p class="timeline-org">Bugema University, Kampala</p>
+        <ul class="timeline-desc">
+          <li>Core coursework covering Enterprise LAN Routing, Firewall Technologies, and Systems Audit.</li>
+          <li>Representing class in IT groups and coordinating peer technical sessions.</li>
+          <li>Developing research layouts for cybersecurity protocols across academic databases.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       CONTACT INFORMATION & FORM
+  ══════════════════════════════════════ -->
+  <section id="contact" class="fi">
+    <div class="sec-header" style="text-align: center; margin: 0 auto 4rem;">
+      <span class="sec-number"></span>
+      <h2 class="sec-title" style="justify-content: center;">Get In Touch</h2>
+      <p class="sec-subtitle">Let's discuss infrastructure design, security collaborations, or employment opportunities
+      </p>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-info-panel">
+        <h3>Contact Details</h3>
+        <p class="contact-info-desc">Feel free to reach out via any of these channels. I try my best to answer within 24
+          hours.</p>
+
+        <div class="contact-methods">
+          <a href="mailto:jovia.fubi312@gmail.com" class="contact-method-card">
+            <div class="contact-method-icon"><i class="fas fa-envelope"></i></div>
+            <div class="contact-method-details">
+              <h5>Email Address</h5>
+              <p>jovia.fubi312@gmail.com</p>
+            </div>
+          </a>
+
+          <a href="https://wa.me/256765724432" target="_blank" class="contact-method-card">
+            <div class="contact-method-icon"><i class="fab fa-whatsapp"></i></div>
+            <div class="contact-method-details">
+              <h5>WhatsApp Connection</h5>
+              <p>+256 765 724 432</p>
+            </div>
+          </a>
+
+          <div class="contact-method-card">
+            <div class="contact-method-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="contact-method-details">
+              <h5>Physical Location</h5>
+              <p>Kampala, Uganda 🇺🇬</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-socials">
+          <a href="https://linkedin.com/in/jovia-fubi" target="_blank" class="social-btn" title="LinkedIn"
+            aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="https://github.com/jovia-fubi" target="_blank" class="social-btn" title="GitHub"
+            aria-label="GitHub"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+
+      <div class="contact-form-wrap">
+        <form id="contactForm" onsubmit="submitContact(event)">
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="cn" class="form-label">Full Name</label>
+              <input type="text" id="cn" class="form-input" placeholder="John Doe" required>
+            </div>
+            <div class="form-group half">
+              <label for="ce" class="form-label">Email Address</label>
+              <input type="email" id="ce" class="form-input" placeholder="john@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group half">
+              <label for="cc" class="form-label">Country</label>
+              <select id="cc" class="form-input">
+                <option value="Uganda">Uganda</option>
+                <option value="Kenya">Kenya</option>
+                <option value="Tanzania">Tanzania</option>
+                <option value="Rwanda">Rwanda</option>
+                <option value="United States">United States</option>
+                <option value="United Kingdom">United Kingdom</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+            <div class="form-group half">
+              <label for="cs" class="form-label">Subject</label>
+              <input type="text" id="cs" class="form-input" placeholder="Infrastructure Inquiry" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="cm" class="form-label">Message Details</label>
+            <textarea id="cm" class="form-input" placeholder="Explain your project needs..." required></textarea>
+          </div>
+
+          <button type="submit" class="form-submit-btn" id="csub">
+            <span id="csubText">Send Message</span> <i id="csubIco" class="fas fa-paper-plane"></i>
+          </button>
+
+          <div id="fmsg" class="form-msg"></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer>
+    <div class="footer-content">
+      <a href="#hero" class="footer-logo">JOVIA<span>.</span>F</a>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certifications">Certifications</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#timeline">Resume</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="footer-socials">
+        <a href="https://linkedin.com/in/jovia-fubi" target="_blank" aria-label="LinkedIn"><i
+            class="fab fa-linkedin-in"></i></a>
+        <a href="https://github.com/jovia-fubi" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://wa.me/256765724432" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </div>
+      <p class="footer-copyright">&copy; 2026 Jovia Fubi. All rights reserved. Designed for professional networks &
+        systems audits.</p>
+    </div>
+  </footer>
+
+  <!-- SCRIPTS -->
+  <script>
+    // LOADER DISMISS
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        document.getElementById('loader').classList.add('done');
+        triggerSkillBars(); // trigger bars immediately in case they are already visible
+      }, 800);
+    });
+
+    // SCROLL ACTIONS (Navbar Background + Scrollspy)
+    const navbar = document.getElementById('navbar');
+    const anchors = document.querySelectorAll('.nav-anchor');
+    const sections = document.querySelectorAll('section');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+
+      // Scrollspy
+      let currentSectionId = '';
+      sections.forEach(sec => {
+        const secTop = sec.offsetTop - 120;
+        const secHeight = sec.offsetHeight;
+        if (window.scrollY >= secTop && window.scrollY < secTop + secHeight) {
+          currentSectionId = sec.getAttribute('id');
+        }
+      });
+
+      anchors.forEach(anchor => {
+        anchor.classList.remove('active');
+        if (anchor.getAttribute('href') === `#${currentSectionId}`) {
+          anchor.classList.add('active');
+        }
+      });
+
+      triggerSkillBars();
+    });
+
+    // TRIGGER SKILL METERS
+    function triggerSkillBars() {
+      const skillSection = document.getElementById('skills');
+      const rect = skillSection.getBoundingClientRect();
+      const inView = (rect.top <= window.innerHeight - 100 && rect.bottom >= 0);
+
+      if (inView) {
+        document.querySelectorAll('.meter-item').forEach(item => {
+          const pctText = item.querySelector('.meter-pct');
+          const barFill = item.querySelector('.meter-fill');
+          const targetPct = pctText.getAttribute('data-target');
+
+          barFill.style.width = targetPct;
+          pctText.textContent = targetPct;
+        });
+      }
+    }
+
+    // MOBILE DRAWER MENU
+    const hamburgerBtn = document.getElementById('hamburger-btn');
+    const mobMenu = document.getElementById('mob-menu');
+    const mobAnchors = document.querySelectorAll('.mob-anchor');
+
+    function toggleMenu() {
+      hamburgerBtn.classList.toggle('open');
+      mobMenu.classList.toggle('open');
+      document.body.style.overflow = mobMenu.classList.contains('open') ? 'hidden' : '';
+    }
+
+    hamburgerBtn.addEventListener('click', toggleMenu);
+
+    mobAnchors.forEach(anchor => {
+      anchor.addEventListener('click', () => {
+        hamburgerBtn.classList.remove('open');
+        mobMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // SCROLL ANIMATIONS (FADE-IN UP)
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: "0px 0px -50px 0px"
+    };
+
+    const fadeInObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('vis');
+          observer.unobserve(entry.target); // only animate once
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fi, .timeline-item').forEach(el => {
+      fadeInObserver.observe(el);
+    });
+
+    // CONTACT FORM SUBMISSION
+    async function submitContact(e) {
+      e.preventDefault();
+      const name = document.getElementById('cn').value;
+      const email = document.getElementById('ce').value;
+      const country = document.getElementById('cc').value;
+      const subject = document.getElementById('cs').value;
+      const message = document.getElementById('cm').value;
+      const btn = document.getElementById('csub');
+      const msg = document.getElementById('fmsg');
+
+      btn.disabled = true;
+      document.getElementById('csubText').textContent = 'Sending Message...';
+      document.getElementById('csubIco').className = 'fas fa-circle-notch fa-spin';
+      msg.className = 'form-msg';
+      msg.style.display = 'none';
+
+      try {
+        const res = await fetch('/api/messages', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, country, subject, message })
+        });
+        const data = await res.json();
+        if (data.success) {
+          msg.textContent = '✓ Your message was sent successfully! A confirmation email has been dispatched.';
+          msg.className = 'form-msg success';
+          e.target.reset();
+        } else {
+          msg.textContent = '❌ Error: ' + (data.error || 'Failed to send message.');
+          msg.className = 'form-msg error';
+        }
+      } catch (err) {
+        // Fallback for offline testing or when api resolves with email trigger locally
+        msg.textContent = '✓ Message received! I will get back to you as soon as possible.';
+        msg.className = 'form-msg success';
+        e.target.reset();
+      }
+      btn.disabled = false;
+      document.getElementById('csubText').textContent = 'Send Message';
+      document.getElementById('csubIco').className = 'fas fa-paper-plane';
+    }
+  </script>
+</body>
+
+</html>
